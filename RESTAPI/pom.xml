@@ -55,6 +55,62 @@
   </dependency>
 
 
+      <!-- 1. Selenium Java -->
+      <dependency>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-java</artifactId>
+          <version>4.18.1</version>
+      </dependency>
+
+      <!-- 2. Cucumber Core & Java -->
+      <dependency>
+          <groupId>io.cucumber</groupId>
+          <artifactId>cucumber-core</artifactId>
+          <version>7.15.0</version>
+      </dependency>
+      <dependency>
+          <groupId>io.cucumber</groupId>
+          <artifactId>cucumber-java</artifactId>
+          <version>7.15.0</version>
+      </dependency>
+
+      <!-- 3. Gherkin Parser -->
+      <dependency>
+          <groupId>io.cucumber</groupId>
+          <artifactId>gherkin</artifactId>
+          <version>26.2.0</version>
+      </dependency>
+
+      <!-- 4. JUnit (JUnit 5 Jupiter API) -->
+      <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-api</artifactId>
+          <version>5.10.2</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>io.cucumber</groupId>
+          <artifactId>cucumber-junit-platform-engine</artifactId>
+          <version>7.15.0</version>
+          <scope>test</scope>
+      </dependency>
+
+      <!-- 5. Hamcrest Core -->
+      <dependency>
+          <groupId>org.hamcrest</groupId>
+          <artifactId>hamcrest-core</artifactId>
+          <version>2.2</version>
+          <scope>test</scope>
+      </dependency>
+
+      <!-- 6. Cucumber HTML / Reporting (Masterthought) -->
+      <dependency>
+          <groupId>net.masterthought</groupId>
+          <artifactId>maven-cucumber-reporting</artifactId>
+          <version>5.7.7</version>
+      </dependency>
+
+
   </dependencies>
   
 </project>
