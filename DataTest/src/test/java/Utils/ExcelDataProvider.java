@@ -24,7 +24,7 @@ public class ExcelDataProvider {
     }
 
 
-    //getColumnNumber
+    //getColumnNumber of specific column
     public int getColumnNumber(String FileName,String SheetName, String CoulmnName) throws IOException {
         FileInputStream fileInputStream=new FileInputStream( setExcelFilePath(FileName));
         XSSFWorkbook book=new XSSFWorkbook(fileInputStream);
@@ -43,6 +43,7 @@ public class ExcelDataProvider {
         return columnNum;
     }
 
+    //To Get cell value from spefici row followed by column
     public String getCellData(String FileName,String SheetName,int column,int row) throws IOException {
         FileInputStream fileInputStream=new FileInputStream( setExcelFilePath(FileName));
         XSSFWorkbook book=new XSSFWorkbook(fileInputStream);
@@ -54,6 +55,7 @@ public class ExcelDataProvider {
 
     public Object[] readExcelFile(String FileName,String SheetName) throws IOException {
 
+        //Initiate File read
         FileInputStream fileInputStream=new FileInputStream( setExcelFilePath(FileName));
         XSSFWorkbook book=new XSSFWorkbook(fileInputStream);
         XSSFSheet sheet=book.getSheet(SheetName);
@@ -62,7 +64,7 @@ public class ExcelDataProvider {
         List<String> ColumnNames=new ArrayList<>();
         Hashtable<String, String> table=new Hashtable<String,String>();
         int rowCount=sheet.getLastRowNum();
-        Object[] datavalue=new Object[rowCount];
+
 
         //Store Column Names:
         for(int i=0;i<lastColumn;i++)
@@ -74,9 +76,23 @@ public class ExcelDataProvider {
 
         }
 
-
+        //Get Excutebale flag column number
         int execute=getColumnNumber(FileName,SheetName,"Execute");
 
+        //Get number of executable scenario
+        int excutableScenarioCount=0;
+        for(int i=1;i<rowCount;i++) {
+            if (getCellData(FileName, SheetName, execute, i).equalsIgnoreCase("Y") && getCellData(FileName, SheetName, execute, i) != null) {
+
+                excutableScenarioCount++;
+            }
+        }
+
+        //Creating array of object for n number of executable scenario
+        Object[] datavalue=new Object[excutableScenarioCount+1];
+
+
+        //Store each row with Y flag with header value in array of object
         int ExecuteTableScenarios=0;
         for(int i=1;i<rowCount;i++)
         {
@@ -86,10 +102,11 @@ public class ExcelDataProvider {
                     table.put(ColumnNames.get(j), getCellData(FileName, SheetName, j, i));
 
                 }
+                datavalue[i-1]=table;
             }
 
         }
-        datavalue[1]=table;
+
         return datavalue;
     }
 }

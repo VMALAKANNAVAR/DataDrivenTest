@@ -11,10 +11,11 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 public class FirstTest extends Base {
 
-    @DataProvider
+    @DataProvider(parallel = true)
     public Object[] DataProvider() throws IOException {
 
         ExcelDataProvider DataProvidervalue=new ExcelDataProvider();
@@ -23,7 +24,7 @@ public class FirstTest extends Base {
     }
 
     @Test(dataProvider="DataProvider")
-    public static void Start(HashMap<String,String> Data) throws IOException {
+    public static void Start(Hashtable Data) throws IOException {
         WebDriver Driver;
         String URL= Utils.ReadProperty.readProperty("Config","URL");
         String USN= Utils.ReadProperty.readProperty("Config","USERNAME");
