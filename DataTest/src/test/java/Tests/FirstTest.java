@@ -1,16 +1,13 @@
 package Tests;
 
-import Utils.Base;
-import Utils.ExcelDataProvider;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import net.bytebuddy.implementation.bind.annotation.Super;
+import HelperGroup.Base;
+import HelperGroup.ExcelDataProvider;
+import PageObjects.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Hashtable;
 
 public class FirstTest extends Base {
@@ -26,11 +23,15 @@ public class FirstTest extends Base {
     @Test(dataProvider="DataProvider")
     public static void Start(Hashtable Data) throws IOException {
         WebDriver Driver;
-        String URL= Utils.ReadProperty.readProperty("Config","URL");
-        String USN= Utils.ReadProperty.readProperty("Config","USERNAME");
-        String PSW= Utils.ReadProperty.readProperty("Config","PASSWORD");
+        String URL= HelperGroup.ReadProperty.readProperty("Config","URL");
+        String USN= HelperGroup.ReadProperty.readProperty("Config","USERNAME");
+        String PSW= HelperGroup.ReadProperty.readProperty("Config","PASSWORD");
         Driver= Base.InitiateDriver();
         Driver.get(URL);
+        LoginPage loginPage=new LoginPage(Driver);
+        loginPage.setUserName(USN);
+        loginPage.setPassword(PSW);
+
 
     }
 }

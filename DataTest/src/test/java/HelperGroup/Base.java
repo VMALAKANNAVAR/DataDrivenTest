@@ -1,4 +1,4 @@
-package Utils;
+package HelperGroup;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
