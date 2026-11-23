@@ -21,16 +21,18 @@ public class FirstTest extends Base {
     }
 
     @Test(dataProvider="DataProvider")
-    public static void Start(Hashtable Data) throws IOException {
-        WebDriver Driver;
+    public static void Start(Hashtable<String,String> Data) throws IOException {
+
         String URL= HelperGroup.ReadProperty.readProperty("Config","URL");
         String USN= HelperGroup.ReadProperty.readProperty("Config","USERNAME");
         String PSW= HelperGroup.ReadProperty.readProperty("Config","PASSWORD");
-        Driver= Base.InitiateDriver();
-        Driver.get(URL);
-        LoginPage loginPage=new LoginPage(Driver);
-        loginPage.setUserName(USN);
-        loginPage.setPassword(PSW);
+        Base.InitiateDriver();
+
+        Base.getDriver().get(URL);
+        System.out.println("USN"+Data.get("UserName")+"Password"+Data.get("Password"));
+        LoginPage loginPage=new LoginPage(Base.getDriver());
+        loginPage.setUserName(Data.get("UserName"));
+        loginPage.setPassword(Data.get("Password"));
 
 
     }

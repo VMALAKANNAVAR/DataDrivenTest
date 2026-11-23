@@ -6,11 +6,20 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Base {
 
-public static WebDriver InitiateDriver()
+
+    public static final ThreadLocal<WebDriver> Driver = new ThreadLocal<>();
+public static void InitiateDriver()
 {
     WebDriverManager.chromedriver().getWebDriver();
-    WebDriver Driver =new ChromeDriver();
-    return Driver;
+
+    Driver.set(new ChromeDriver());
+
 }
+
+public static WebDriver getDriver()
+{
+    return Driver.get();
+}
+
 
 }
