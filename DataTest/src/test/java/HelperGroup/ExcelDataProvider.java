@@ -95,7 +95,7 @@ public class ExcelDataProvider {
         }
 
         //Creating array of object for n number of executable scenario
-        Object[] datavalue=new Object[excutableScenarioCount+1];
+        Object[] datavalue=new Object[excutableScenarioCount];
 
 
         //Store each row with Y flag with header value in array of object
