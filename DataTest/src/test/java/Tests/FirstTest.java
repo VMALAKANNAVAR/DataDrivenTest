@@ -33,6 +33,7 @@ public class FirstTest extends Base {
         LoginPage loginPage=new LoginPage(Base.getDriver());
         loginPage.setUserName(Data.get("UserName"));
         loginPage.setPassword(Data.get("Password"));
+        Base.CloseDriver();
 
 
     }

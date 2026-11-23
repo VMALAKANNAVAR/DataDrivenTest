@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Base {
 
-
     public static final ThreadLocal<WebDriver> Driver = new ThreadLocal<>();
 public static void InitiateDriver()
 {
@@ -21,5 +20,10 @@ public static WebDriver getDriver()
     return Driver.get();
 }
 
+public static void CloseDriver()
+{
+    WebDriver driver=Driver.get();
+    driver.quit();
+}
 
 }
