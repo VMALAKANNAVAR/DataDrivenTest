@@ -15,10 +15,10 @@ import java.util.List;
 
 public class ExcelDataProvider {
 
-    public static File path;
-    public static FileInputStream fileInputStream;
-    public static XSSFWorkbook book;
-    public static XSSFSheet sheet;
+    public  File path;
+    public  FileInputStream fileInputStream;
+    public  XSSFWorkbook book;
+    public  XSSFSheet sheet;
 
     public File setExcelFilePath(String FileName)
     {
@@ -52,6 +52,9 @@ public class ExcelDataProvider {
         book=new XSSFWorkbook(fileInputStream);
         sheet=book.getSheet(SheetName);
         XSSFRow rowValues=sheet.getRow(row);
+        if (rowValues == null) {
+            return "";
+        }
         String cellValue=rowValues.getCell(column).getStringCellValue();
         return cellValue;
     }
@@ -84,7 +87,7 @@ public class ExcelDataProvider {
 
         //Get number of executable scenario
         int excutableScenarioCount=0;
-        for(int i=1;i<rowCount;i++) {
+        for(int i=1;i<=rowCount;i++) {
             if (getCellData(FileName, SheetName, execute, i).equalsIgnoreCase("Y") && getCellData(FileName, SheetName, execute, i) != null) {
 
                 excutableScenarioCount++;
@@ -112,7 +115,7 @@ public class ExcelDataProvider {
             }
 
         }
-
+        fileInputStream.close();
         return datavalue;
     }
 }
