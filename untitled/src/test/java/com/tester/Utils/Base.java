@@ -1,5 +1,6 @@
 package com.tester.Utils;
 
+import io.cucumber.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,9 +20,11 @@ public class Base {
         return Driver.get();
     }
 
+
     public static void closeWebSite()
     {
         WebDriver driver=Driver.get();
+        System.out.println("Closing Browser");
         if(driver!=null) {
             driver.quit();
             driver=null;

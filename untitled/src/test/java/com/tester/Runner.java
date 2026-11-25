@@ -2,12 +2,17 @@ package com.tester;
 
 
 import com.tester.Utils.Base;
+import io.cucumber.junit.Cucumber;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import org.junit.runner.RunWith;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 
+@Listeners
+@RunWith(Cucumber.class)
 @CucumberOptions(
         features = {"src/test/resources/Features/"},
         glue = {"com.tester.stepdefs"},
@@ -17,15 +22,11 @@ import org.testng.annotations.DataProvider;
 )
 public class Runner extends AbstractTestNGCucumberTests {
 
+
 @DataProvider(parallel = true)
-public Object[][] DataProviderMethod()
+public Object[][] scenarios()
 {
     return super.scenarios();
 }
 
-@AfterMethod
-public void closeBrowser()
-{
-    Base.closeWebSite();
-}
 }

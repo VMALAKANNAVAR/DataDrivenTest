@@ -2,6 +2,7 @@ package com.tester.PageObjects;
 
 import com.tester.Utils.Base;
 import com.tester.Utils.CommanFunctions;
+import com.tester.Utils.Reports;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -21,6 +22,7 @@ public class Logintest {
     public Logintest(WebDriver driver)
     {
         this.driver= driver;
+        this.driver.manage().timeouts().pageLoadTimeout(20,TimeUnit.SECONDS);
         this.wait=new WebDriverWait(driver, TimeUnit.SECONDS.toSeconds(20));
         PageFactory.initElements(driver,this);
     }
@@ -31,18 +33,22 @@ public class Logintest {
 
 
     public void ValidateCurrentURL(String URL) throws InterruptedException {
+        Reports.createTest("Validate Current URL");
         Thread.sleep(2000);
         String CurrentURL=driver.getCurrentUrl();
         Assert.assertEquals("User is on LoginPage",CurrentURL,URL);
+        Reports.ReportPass("URL Validated succesfully");
 
     }
 
 
     public void EnterLoginDetails(String USN,String PSW)
     {
+        Reports.createTest("Validated login Fucntion");
         commanFunctions.setText(Username,USN);
         commanFunctions.setText(Password,PSW);
         commanFunctions.ClickElement(SubmitButton);
+        Reports.ReportPass("Added Login Details succesfully");
 
     }
 
