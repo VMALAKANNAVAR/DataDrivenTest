@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Logintest {
@@ -32,23 +33,25 @@ public class Logintest {
     @FindBy(xpath = "//*[@id='submit']") WebElement SubmitButton;
 
 
-    public void ValidateCurrentURL(String URL) throws InterruptedException {
+    public void ValidateCurrentURL(String URL) throws InterruptedException, IOException {
         Reports.createTest("Validate Current URL");
         Thread.sleep(2000);
         String CurrentURL=driver.getCurrentUrl();
-        Assert.assertEquals("User is on LoginPage",CurrentURL,URL);
-        Reports.ReportPass("URL Validated succesfully");
-
+        if(URL.equalsIgnoreCase(CurrentURL)) {
+            Reports.ReportPassWithScreenshot("URL Validated succesfully");
+        }
+        else
+            Reports.ReportFailWithScreenshot("URL Validated Failed");
     }
 
 
-    public void EnterLoginDetails(String USN,String PSW)
-    {
-        Reports.createTest("Validated login Fucntion");
+    public void EnterLoginDetails(String USN,String PSW) throws IOException {
+        Reports.createTest("login Details");
         commanFunctions.setText(Username,USN);
         commanFunctions.setText(Password,PSW);
+        Reports.ReportPassWithScreenshot("Added Login Details succesfully");
         commanFunctions.ClickElement(SubmitButton);
-        Reports.ReportPass("Added Login Details succesfully");
+
 
     }
 

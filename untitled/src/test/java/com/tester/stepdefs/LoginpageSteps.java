@@ -11,19 +11,19 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class LoginpageSteps {
 
     Logintest test=new Logintest(Base.getWebDriver());
     @When("user should reach to {string}")
-    public void ValidateLoginPageURL(String URL) throws InterruptedException {
+    public void ValidateLoginPageURL(String URL) throws InterruptedException, IOException {
         test.ValidateCurrentURL(URL);
     }
 
     @And("^User enter (.*) and (.*) and Click on loginButton$")
-    public void AddLoginDetails(String USN,String PSW)
-    {
+    public void AddLoginDetails(String USN,String PSW) throws IOException {
        System.out.println("USN is"+USN+" and PSW is "+PSW);
        test.EnterLoginDetails(USN,PSW);
     }
