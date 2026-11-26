@@ -1,6 +1,7 @@
 package PageObjects;
 
 import HelperGroup.CommandFunctions;
+import HelperGroup.Reporting;
 import org.aspectj.weaver.bcel.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +18,7 @@ public class LoginPage {
     public WebDriver driver=null;
     public WebDriverWait wait;
 
-    CommandFunctions commandFunctions=new CommandFunctions();
+    private CommandFunctions commandFunctions=new CommandFunctions();
     public LoginPage(WebDriver driver)
     {
         this.driver=driver;
@@ -25,25 +26,26 @@ public class LoginPage {
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy(xpath = "//input[@id='username']") WebElement Username;
-    @FindBy(xpath = "//input[@id='password']") WebElement Password;
-    @FindBy(xpath = "//*[@id='submit']") WebElement SubmitButton;
+    @FindBy(xpath = "//input[@id='username']")
+     WebElement Username;
+    @FindBy(xpath = "//input[@id='password']")
+     WebElement Password;
+    @FindBy(xpath = "//*[@id='submit']")
+     WebElement SubmitButton;
 
-    public void setUserName(String userName)
+
+    public void userLogin(String userName,String password)
     {
+        Reporting.Createtest("Login Validation");
         commandFunctions.setText(Username,wait,userName);
-
-    }
-
-    public void setPassword(String password)
-    {
         commandFunctions.setText(Password,wait,password);
+        Reporting.reportPassWithScreenShot("Login Details are added");
+        commandFunctions.ClickButton(SubmitButton,wait);
+        Reporting.reportPassWithScreenShot("Login Succesfull");
+
     }
 
-    public void ClickSubmit()
-    {
-        commandFunctions.ClickButton(SubmitButton,wait);
-    }
+
 
 
 }
