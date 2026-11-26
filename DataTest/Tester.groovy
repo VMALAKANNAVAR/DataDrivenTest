@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script {
                     // Add your Groovy logic here, or run Maven directly with bat:
-                    bat 'mvn clean test'
+                    bat 'cd DataTest && mvn clean test'
                 }
             }
         }
