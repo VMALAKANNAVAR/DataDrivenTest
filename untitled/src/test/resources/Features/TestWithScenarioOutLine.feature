@@ -1,4 +1,4 @@
-@test2
+@test1
 Feature:Tester
 
 Background:
@@ -10,6 +10,6 @@ And User enter <USN> and <PSW> and Click on loginButton
 Then user should reach to "https://practicetestautomation.com/logged-in-successfully/"
 Examples:
     |USN|PSW|
-    |student|Password123 |
-    |Student|Password123 |
-    |student|Password1234|
+    |student3|Password123 |
+    |Student4|Password123 |
+    |student5|Password1234|

@@ -27,9 +27,6 @@ public class Base {
         System.out.println("Closing Browser");
         if(driver!=null) {
             driver.quit();
-
         }
-
-        Driver.remove();
     }
 }

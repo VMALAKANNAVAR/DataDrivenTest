@@ -11,7 +11,6 @@ public class BackGroundSteps {
 
     WebDriver driver;
 
-
     @When("User launch WebSite")
     public void LaunchURL() throws IOException {
        Reports.createTest("Website Launch");
