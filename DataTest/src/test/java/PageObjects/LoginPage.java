@@ -52,8 +52,4 @@ public class LoginPage {
         }
         Reporting.reportPassWithScreenShot("Login Succesfull");
     }
-
-
-
-
 }
