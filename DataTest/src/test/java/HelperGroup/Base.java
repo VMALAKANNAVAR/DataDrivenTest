@@ -12,6 +12,7 @@ public static void InitiateDriver()
     WebDriverManager.chromedriver().getWebDriver();
 
     Driver.set(new ChromeDriver());
+    Driver.get().manage().window().maximize();
 
 }
 

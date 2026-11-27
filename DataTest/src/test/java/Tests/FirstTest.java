@@ -2,6 +2,7 @@ package Tests;
 
 import HelperGroup.*;
 import PageObjects.LoginPage;
+import PageObjects.SignInPage;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
@@ -34,10 +35,8 @@ public class FirstTest extends Base {
         String URL= HelperGroup.ReadProperty.readProperty("Config","URL");
         Base.getDriver().get(URL);
         Reporting.InitiateReport("C:\\DataDrivenFramewrok\\DataTest\\src\\test\\resources\\TestReports\\"+Data.get("Scenario")+random.nextLong()+".html");
-        System.out.println("USN"+Data.get("UserName")+"Password"+Data.get("Password"));
         LoginPage loginPage=new LoginPage(Base.getDriver());
-        loginPage.userLogin(Data.get("UserName"),Data.get("Password"));
-
+        loginPage.userLogin(Data);
     }
 
     @AfterMethod

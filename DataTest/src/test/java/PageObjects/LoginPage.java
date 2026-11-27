@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Hashtable;
 import java.util.concurrent.TimeUnit;
 
 public class LoginPage {
@@ -26,23 +27,30 @@ public class LoginPage {
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy(xpath = "//input[@id='username']")
+    @FindBy(xpath = "//*[contains(text(),' Signup / Login')]") WebElement LoginHyperLink;
+    @FindBy(xpath = "//*[@name='email' and @data-qa='login-email']")
      WebElement Username;
-    @FindBy(xpath = "//input[@id='password']")
+    @FindBy(xpath = "//*[@name='password' and @data-qa='login-password']")
      WebElement Password;
-    @FindBy(xpath = "//*[@id='submit']")
+    @FindBy(xpath = "//*[@data-qa='login-button']")
      WebElement SubmitButton;
+    @FindBy(xpath = "//*[contains(text(),' Logout')]") WebElement LogoutButton;
+    String logoutButton="//*[contains(text(),'Logout')]";
 
-
-    public void userLogin(String userName,String password)
+    public void userLogin(Hashtable<String,String> data)
     {
         Reporting.Createtest("Login Validation");
-        commandFunctions.setText(Username,wait,userName);
-        commandFunctions.setText(Password,wait,password);
+        commandFunctions.ClickButton(LoginHyperLink,wait);
+        commandFunctions.setText(Username,wait,data.get("EmailID"));
+        commandFunctions.setText(Password,wait,data.get("Password"));
         Reporting.reportPassWithScreenShot("Login Details are added");
         commandFunctions.ClickButton(SubmitButton,wait);
+        if(!commandFunctions.validatElementPresence(logoutButton))
+        {
+            SignInPage signInPage=new SignInPage(driver);
+            signInPage.SIGNUP(data);
+        }
         Reporting.reportPassWithScreenShot("Login Succesfull");
-
     }
 
 
