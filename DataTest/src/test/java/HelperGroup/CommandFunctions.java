@@ -42,6 +42,12 @@ public class CommandFunctions {
         }
     }
 
+    public void WaitUntilElementDisAppear(WebElement element, WebDriverWait wait) {
+        Base.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+
     public void ScrollToElement(WebElement element, WebDriverWait wait) {
         JavascriptExecutor js = (JavascriptExecutor) Base.getDriver();
         js.executeScript("arguments[0].scrollIntoView(true);", element);
