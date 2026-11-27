@@ -1,7 +1,10 @@
 package HelperGroup;
 
+import org.apache.commons.math3.ode.events.Action;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,5 +40,26 @@ public class CommandFunctions {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public void ScrollToElement(WebElement element, WebDriverWait wait) {
+        JavascriptExecutor js = (JavascriptExecutor) Base.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void HoverOverElement(WebElement element, WebDriverWait wait) {
+        Actions action = new Actions(Base.getDriver());
+        action.moveToElement(element).build().perform();
+    }
+
+    public void DoubleClick(WebElement element, WebDriverWait wait) {
+        Actions action = new Actions(Base.getDriver());
+        action.doubleClick(element).build().perform();
+    }
+
+    public void RightClick(WebElement element, WebDriverWait wait) {
+        Actions action = new Actions(Base.getDriver());
+        action.contextClick(element).build().perform();
     }
 }
